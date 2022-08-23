@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1.8",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
