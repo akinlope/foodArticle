@@ -100,40 +100,42 @@
         <span class="text-gray-500 text-2xl" >Create your account</span>
         <div class="mt-4 bg-white shadow-md rounded-lg">
           <div class="h-2 bg-primary rounded-t-md"></div>
-          <form class="px-8 py-6">
+          <form action="submit" id="sign-upForm" class="px-8 py-6">
               <label class="text-left block font-semibold text-gray-500">Username</label>
               <input
                 placeholder="Username"
                 type="text"
                 class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
-              />
+                id="uname"
+                />
               <label class="text-left mt-3 block font-semibold text-gray-500">Email address</label>
             <input
               placeholder="Email"
               type="email"
               class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
-            />
+              id="email"
+              />
               <label class="text-left mt-3 block font-semibold text-gray-500">Password</label>
             <input
               placeholder="Password"
               type="password"
               class="border w-full h-5 px-3 py-5 mt-0 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
-            />
+              id="pwd"
+              />
             <div class="flex justify-between items-baseline">
-              <button class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500">Register</button>
+              <button class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500" id="regis">Register</button>
               <button class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500">Login</button>
             </div>
             <div class="h-0.5 mt-2 mb-2 bg-primary rounded"></div>
             <span class="text-gray-500 text-lg font-light text-center mt-4" >Sign up with</span>
             <div class="flex justify-evenly">
                 <a href="">google</a>
-                <a href="">facebook</a>
             </div>
           </form>
         </div>
       </main>
     </div>
     </div>
-    <script src="signUp.js"></script>
+    <script src="/dist/signUp.bundle.js"></script>
   </body>
 </html>

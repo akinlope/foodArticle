@@ -1,16 +1,16 @@
 const path = require("path");
 module.exports = {
   mode: "development",
-  entry: [
-    "./src/addArticle/addArticle.js",
-    "./src/authorizedLandinPage/authLanding.js",
-    "./src/login/login.js",
-    "./src/signUp/signUp.js",
-    "./src/userProfile/userProfile.js",
-  ],
+  entry: {
+    addArticle: "./src/addArticle/addArticle.js",
+    authLanding: "./src/authorizedLandinPage/authLanding.js",
+    login: "./src/login/login.js",
+    signUp: "./src/signUp/signUp.js",
+    userProfile: "./src/userProfile/userProfile.js",
+},
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
   watch: true,
 };
