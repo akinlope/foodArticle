@@ -33,12 +33,15 @@ loginForm.addEventListener("submit", (e)=> {
     e.preventDefault()
     let email = loginForm["email"].value;
     let password = loginForm["pwd"].value;
+    // console.log(password);
 
     // console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        // userCredential.user.displayName = username;
+        window.location.replace("../authorizedLandinPage/authLanding.html")
+        console.log(userCredential);
         console.log("login succesful");
     })
     .catch((error) => {

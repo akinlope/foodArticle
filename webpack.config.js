@@ -7,6 +7,7 @@ module.exports = {
     login: "./src/login/login.js",
     signUp: "./src/signUp/signUp.js",
     userProfile: "./src/userProfile/userProfile.js",
+    index: "./src/index.js"
 },
   output: {
     filename: "[name].bundle.js",

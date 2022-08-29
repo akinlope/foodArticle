@@ -24,10 +24,12 @@ burger.addEventListener("click", ()=> {
     }
 });
 
+//signout fuction
 sign.addEventListener("click", ()=> {
-    auth.signOut().then(()=> {
-        window.location.replace("../index.html")
+    // console.log("clicked...");
+    signOut(auth).then(()=> {
         console.log("user signed out");
+        window.location.href = "../index.html";
     })
     .catch((error)=> {
         console.log(error);
