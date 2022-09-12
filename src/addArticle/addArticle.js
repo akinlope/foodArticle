@@ -15,19 +15,12 @@ const burger = document.querySelector("#burger");
 const menu = document.querySelector("#menu");
 const addArticle = document.querySelector("form");
 const image = document.querySelector("#img");
+let img = "";
 // console.log(image.value);
 
 const db = getFirestore();
 const colRef = collection(db, "articles");
-
 const storage = getStorage();
-const srorageRef  = ref(storage);
-
-const imageRef = ref(storage, "images");
-
-
-
-
 
 
 burger.addEventListener("click", () => {
@@ -41,20 +34,22 @@ burger.addEventListener("click", () => {
 addArticle.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const sparkyRef = ref(storage, `images/${image.value}`);
-
+  const sparkyRef = ref(storage, `images/${img.name}`);
   addDoc(colRef, {
     title: addArticle.title.value,
     author: addArticle.author.value,
     body: addArticle.body.value,
+    img: img.name
   })
     .then(() => {
-      addArticle.reset();
+     
       console.log("articles has been added ");
 
 
-      uploadBytes(sparkyRef,File).then((s)=>{
+      uploadBytes(sparkyRef,img).then((s)=>{
         console.log("uploaded to blob or file")
+        addArticle.reset();
+        
       }).catch((err)=> {err.message})
     })
     .catch((err) => {
@@ -63,4 +58,8 @@ addArticle.addEventListener("submit", (e) => {
     uploadBytes();
 });
 
-
+image.addEventListener("change", (event)=>{
+  console.log(event.target.files[0]);
+  img = event.target.files[0];
+  console.log();
+})

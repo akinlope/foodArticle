@@ -33,8 +33,8 @@ getDocs(colRef)
       let title = doc.data().title
       let author = doc.data().author
       console.log();
-      document.querySelector("#title").innerHTML = title;
-      document.querySelector("#author").innerHTML = author
+      document.querySelector("#title").innerHTML += title;
+      document.querySelector("#author").innerHTML += author
     });
     // console.log(articles);
   })
