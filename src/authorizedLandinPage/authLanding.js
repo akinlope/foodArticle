@@ -30,7 +30,7 @@ const closeBody = document.querySelector("#closeBody");
 const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage();
-
+let article = [];
 /* INITIALIZING FIREBASE COLLECTIONS */
 const colRef = collection(db, "articles");
 
@@ -44,36 +44,44 @@ burger.addEventListener("click", () => {
 
 const q = query(colRef, orderBy("title", "asc"));
 getDocs(q).then( async (s) => {
-  let article = [];
+  let allUrl = []
   console.log(s);
-  // console.log(article);
-
-  await Promise.all(s.forEach( async (doc) => {
-    article.push({ ...doc.data(), id: doc.id });
+  console.log(article, "flog");
+   const pro = new Promise((resolve, reject) => {s.forEach( async (doc) => {
     console.log(article);
     let title = doc.data().title;
     let author = doc.data().author;
     let body = doc.data().body;
     let img = doc.data().img;
     const sparkyRef = ref(storage, `images/${img}`);
-    
-
-    getDownloadURL(sparkyRef)
-      .then((url) => {
-        // console.log(url + img);
-        container.innerHTML += `<div class="card hover:shadow-lg cards cursor-pointer"> 
-            <img src="${url}.${img}" alt="stew" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">${title}</span>
-              <span class="block text-gray-500 text-sm">${author}</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5 p-0" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>`;
-
-        const card = document.querySelectorAll(".cards");
+     const url =  getDownloadURL(sparkyRef)
+     allUrl.push(url);
+      article.push({ ...doc.data(), id: doc.id, url });
+      console.log("article pushed")
+      // .then((url) => {
+        // console.log(url + img);  
+    });
+    resolve(allUrl);
+  });
+    return pro        
+}).then(async(pro) => {
+  
+  let allUrlS = await Promise.all(pro);
+  console.log(allUrlS, "sna")
+  console.log(article, "snaA")
+  article.map((article, index) => {
+    container.innerHTML += `<div class="card hover:shadow-lg cards cursor-pointer"> 
+    <img src="${allUrlS[index]}.${article.img}" alt="stew" class="h-32 sm:h-48 w-full object-cover">
+    <div class="m-4">
+      <span class="font-bold">${article.title}</span>
+      <span class="block text-gray-500 text-sm">${article.author}</span>
+    </div>
+    <div class="badge">
+      <svg class="inline-block w-5 p-0" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <span>25 mins</span>
+    </div>
+  </div>`;
+  const card = document.querySelectorAll(".cards");
         for (let i = 0; i < card.length; i++) {
           card[i].addEventListener("click", () => {
             console.log(article[i].title);
@@ -93,12 +101,8 @@ getDocs(q).then( async (s) => {
               */
           });
         }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
   })
-  );
+ 
 });
 
 
