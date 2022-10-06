@@ -40,13 +40,10 @@ loginForm.addEventListener("submit", (e)=> {
     .then((userCredential) => {
         const user = userCredential.user;
         // userCredential.user.displayName = username;
-        window.location.replace("../authorizedLandinPage/authLanding.html")
-        console.log(userCredential);
-        console.log("login succesful");
+        window.location.replace("../authorizedLandinPage/authLanding.html");
+        alert("Login Successful");
     })
     .catch((error) => {
-        console.log(error.message);
-        console.log(error.code);
-        console.log("Login unsucessful");
+        alert(error.message);
     })
 })

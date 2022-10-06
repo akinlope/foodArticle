@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 const firebaseConfig = {
@@ -18,9 +19,11 @@ const image = document.querySelector("#img");
 let img = "";
 // console.log(image.value);
 
+// getting firebase services
 const db = getFirestore();
 const colRef = collection(db, "articles");
 const storage = getStorage();
+const auth = getAuth();
 
 
 burger.addEventListener("click", () => {
@@ -43,7 +46,7 @@ addArticle.addEventListener("submit", (e) => {
   })
     .then(() => {
      
-      console.log("articles has been added ");
+      alert("Article has been succefully added :)")
 
 
       uploadBytes(sparkyRef,img).then((s)=>{
@@ -62,4 +65,28 @@ image.addEventListener("change", (event)=>{
   console.log(event.target.files[0]);
   img = event.target.files[0];
   console.log();
-})
+});
+
+
+
+//taking the user back to the auth landing page
+const HOMES = document.querySelectorAll("#HOME");
+
+for(let i = 0; i < HOMES.length; i++){
+
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      HOMES[i].addEventListener("click", ()=> {
+        // console.log(HOMES[i]);
+        // console.log(user);
+        // console.log("user is signed in");
+        window.location.assign("/src/authorizedLandinPage/authLanding.html");
+      });
+    }else{
+        // console.log("No user signed in");
+      HOMES[i].addEventListener("click", ()=> {
+        window.location.assign("/src/index.html");
+      });
+    }
+  })
+}

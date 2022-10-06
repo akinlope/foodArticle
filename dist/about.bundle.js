@@ -70,13 +70,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/signUp/signUp.js":
-/*!******************************!*\
-  !*** ./src/signUp/signUp.js ***!
-  \******************************/
+/***/ "./src/aboutPage/about.js":
+/*!********************************!*\
+  !*** ./src/aboutPage/about.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.esm.js\");\n\r\n\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyAZtrim4yk9HgaT1IoDp8S60OcuHWNe1Og\",\r\n  authDomain: \"food-article.firebaseapp.com\",\r\n  projectId: \"food-article\",\r\n  storageBucket: \"food-article.appspot.com\",\r\n  messagingSenderId: \"139394569028\",\r\n  appId: \"1:139394569028:web:5995898a5d9ec3021d7d11\",\r\n};\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst burger = document.querySelector(\"#burger\");\r\nconst menu = document.querySelector(\"#menu\");\r\nconst signUpForm = document.querySelector(\"#sign-upForm\");\r\n// const login = document.querySelector(\"#login\");\r\n\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\nburger.addEventListener(\"click\", () => {\r\n  if (menu.classList.contains(\"hidden\")) {\r\n    menu.classList.remove(\"hidden\");\r\n  } else {\r\n    menu.classList.add(\"hidden\");\r\n  }\r\n});\r\n\r\n// Signup form\r\n signUpForm.addEventListener(\"submit\", (e) => {\r\n  e.preventDefault();\r\n  console.log(\"clicked\");\r\n    // get user info\r\n    let username = signUpForm[\"uname\"].value;\r\n    let email = signUpForm[\"email\"].value;\r\n    let password = signUpForm[\"pwd\"].value;\r\n    (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(auth, email, username, password)\r\n      .then((userCredential) => {\r\n        userCredential.user.displayName = username;\r\n        console.log(userCredential.user);\r\n        \r\n        signUpForm.reset();\r\n        window.location.href = \"../login/login.html\";\r\n        alert(\"Registration successful\");\r\n      })\r\n      .catch((error) => {\r\n        alert(error.message);\r\n        signUpForm.reset();\r\n      });\r\n  // }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/signUp/signUp.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyAZtrim4yk9HgaT1IoDp8S60OcuHWNe1Og\",\r\n  authDomain: \"food-article.firebaseapp.com\",\r\n  projectId: \"food-article\",\r\n  storageBucket: \"food-article.appspot.com\",\r\n  messagingSenderId: \"139394569028\",\r\n  appId: \"1:139394569028:web:5995898a5d9ec3021d7d11\",\r\n};\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\n\r\n\r\nburger.addEventListener(\"click\", () => {\r\n    if (menu.classList.contains(\"hidden\")) {\r\n      menu.classList.remove(\"hidden\");\r\n    } else {\r\n      menu.classList.add(\"hidden\");\r\n    }\r\n  });\r\n\r\n\r\n//taking the user back to the auth landing page\r\nconst HOMES = document.querySelectorAll(\"#HOME\");\r\n\r\nfor(let i = 0; i < HOMES.length; i++){\r\n\r\n  (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, (user) => {\r\n    if(user){\r\n      HOMES[i].addEventListener(\"click\", ()=> {\r\n        // console.log(HOMES[i]);\r\n        // console.log(user);\r\n        // console.log(\"user is signed in\");\r\n        window.location.assign(\"/src/authorizedLandinPage/authLanding.html\");\r\n      });\r\n    }else{\r\n        // console.log(\"No user signed in\");\r\n      HOMES[i].addEventListener(\"click\", ()=> {\r\n        window.location.assign(\"/src/index.html\");\r\n      });\r\n    }\r\n  })\r\n}\r\n\n\n//# sourceURL=webpack:///./src/aboutPage/about.js?");
 
 /***/ }),
 
@@ -202,7 +202,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/signUp/signUp.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/aboutPage/about.js");
 /******/ 	
 /******/ })()
 ;

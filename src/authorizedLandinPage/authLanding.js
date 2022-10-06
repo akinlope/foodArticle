@@ -1,13 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signOut } from "firebase/auth";
-import {
-  getDocs,
-  getFirestore,
-  collection,
-  doc,
-  getDoc,
-  query, where, orderBy
-} from "firebase/firestore";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getDocs, getFirestore, collection, query, orderBy } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = {
@@ -30,9 +23,10 @@ const closeBody = document.querySelector("#closeBody");
 const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage();
-let article = [];
-/* INITIALIZING FIREBASE COLLECTIONS */
 const colRef = collection(db, "articles");
+
+/* INITIALIZING FIREBASE COLLECTIONS */
+let article = [];
 
 burger.addEventListener("click", () => {
   if (menu.classList.contains("hidden")) {
@@ -45,10 +39,10 @@ burger.addEventListener("click", () => {
 const q = query(colRef, orderBy("title", "asc"));
 getDocs(q).then( async (s) => {
   let allUrl = []
-  console.log(s);
-  console.log(article, "flog");
+  // console.log(s);
+  // console.log(article, "flog");
    const pro = new Promise((resolve, reject) => {s.forEach( async (doc) => {
-    console.log(article);
+    // console.log(article);
     let title = doc.data().title;
     let author = doc.data().author;
     let body = doc.data().body;
@@ -57,7 +51,7 @@ getDocs(q).then( async (s) => {
      const url =  getDownloadURL(sparkyRef)
      allUrl.push(url);
       article.push({ ...doc.data(), id: doc.id, url });
-      console.log("article pushed")
+      // console.log("article pushed")
       // .then((url) => {
         // console.log(url + img);  
     });
@@ -67,8 +61,8 @@ getDocs(q).then( async (s) => {
 }).then(async(pro) => {
   
   let allUrlS = await Promise.all(pro);
-  console.log(allUrlS, "sna")
-  console.log(article, "snaA")
+  // console.log(allUrlS, "sna")
+  // console.log(article, "snaA")
   article.map((article, index) => {
     container.innerHTML += `<div class="card hover:shadow-lg cards cursor-pointer"> 
     <img src="${allUrlS[index]}.${article.img}" alt="stew" class="h-32 sm:h-48 w-full object-cover">
@@ -84,26 +78,37 @@ getDocs(q).then( async (s) => {
   const card = document.querySelectorAll(".cards");
         for (let i = 0; i < card.length; i++) {
           card[i].addEventListener("click", () => {
-            console.log(article[i].title);
-            /*
-            container.innerHTML = `<div class="font-body bg-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-              <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-              </svg>
-
-                <div class="">
-                  <span class="font-extrabold mb-4">${article[i].title}</span>
-                  <br />
-                  <span class="font-extrabold mb-4">${article[i].author}</span>
-                  <p>${article[i].body}</p>
-                </div>
-              </div>`;
-              */
+            // console.log(article[i].title);
           });
         }
   })
  
 });
+
+
+
+
+//taking the user back to the auth landing page
+const HOMES = document.querySelectorAll("#HOME");
+
+for(let i = 0; i < HOMES.length; i++){
+
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      HOMES[i].addEventListener("click", ()=> {
+        // console.log(HOMES[i]);
+        // console.log(user);
+        // console.log("user is signed in");
+        window.location.assign("/src/authorizedLandinPage/authLanding.html");
+      });
+    }else{
+        // console.log("No user signed in");
+      HOMES[i].addEventListener("click", ()=> {
+        window.location.assign("/src/index.html");
+      });
+    }
+  })
+}
 
 
 

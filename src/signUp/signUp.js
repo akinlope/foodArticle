@@ -37,14 +37,14 @@ burger.addEventListener("click", () => {
       .then((userCredential) => {
         userCredential.user.displayName = username;
         console.log(userCredential.user);
-        console.log("registered");
+        
         signUpForm.reset();
         window.location.href = "../login/login.html";
+        alert("Registration successful");
       })
       .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-        console.log("not registered");
+        alert(error.message);
+        signUpForm.reset();
       });
   // }
 });
