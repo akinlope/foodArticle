@@ -78,37 +78,37 @@ getDocs(q).then( async (s) => {
   const card = document.querySelectorAll(".cards");
         for (let i = 0; i < card.length; i++) {
           card[i].addEventListener("click", () => {
-            // console.log(article[i].title);
+            console.log(article[i]);
           });
         }
   })
  
 });
-
+console.log(article);
 
 
 
 //taking the user back to the auth landing page
 const HOMES = document.querySelectorAll("#HOME");
 
-for(let i = 0; i < HOMES.length; i++){
+// for(let i = 0; i < HOMES.length; i++){
 
-  onAuthStateChanged(auth, (user) => {
-    if(user){
-      HOMES[i].addEventListener("click", ()=> {
-        // console.log(HOMES[i]);
-        // console.log(user);
-        // console.log("user is signed in");
-        window.location.assign("/src/authorizedLandinPage/authLanding.html");
-      });
-    }else{
-        // console.log("No user signed in");
-      HOMES[i].addEventListener("click", ()=> {
-        window.location.assign("/src/index.html");
-      });
-    }
-  })
-}
+//   onAuthStateChanged(auth, (user) => {
+//     if(user){
+//       HOMES[i].addEventListener("click", ()=> {
+//         // console.log(HOMES[i]);
+//         // console.log(user);
+//         // console.log("user is signed in");
+//         window.location.assign("/src/authorizedLandinPage/authLanding.html");
+//       });
+//     }else{
+//         // console.log("No user signed in");
+//       HOMES[i].addEventListener("click", ()=> {
+//         window.location.assign("/src/index.html");
+//       });
+//     }
+//   })
+// }
 
 
 
