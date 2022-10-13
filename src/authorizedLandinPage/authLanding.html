@@ -6,7 +6,7 @@
     <link href="/dist/output.css" rel="stylesheet" />
   </head>
   <body class="text-gray-600 font-body">
-    <div class="grid md:grid-cols-3">
+    <div id="mainBody" class="grid md:grid-cols-3">
       <div class="md:col-span-1 md:flex md:justify-end">
         <nav class="text-right">
           <div class="flex justify-between items-center">
@@ -115,10 +115,15 @@
           <div id="grid" class="mt-8 grid lg:grid-cols-3 gap-10">
             <!-- cards go here -->
           </div>
+          
         </div>
 
       </main>
     </div>
+
+
+    <!-- To view the full information of each card -->
+    <div id="openBody" class="bg-secondary-200 font-body"></div>
     <script src="/dist/authLanding.bundle.js"></script>
     <script src="/dist/navbar.bundle.js"></script>
   </body>

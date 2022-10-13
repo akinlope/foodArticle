@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import { getDocs, getFirestore, collection, query, orderBy } from "firebase/firestore";
+import { getDocs, getFirestore, collection, query, orderBy, doc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = {
@@ -17,7 +17,8 @@ const burger = document.querySelector("#burger");
 const menu = document.querySelector("#menu");
 const signout = document.querySelector("#logout");
 const container = document.querySelector("#grid");
-const closeBody = document.querySelector("#closeBody");
+const openBody = document.querySelector("#openBody");
+const mainBody = document.querySelector("#mainBody");
 
 /* GETTING FIREBASE SERVICES*/
 const auth = getAuth();
@@ -27,7 +28,7 @@ const colRef = collection(db, "articles");
 
 /* INITIALIZING FIREBASE COLLECTIONS */
 let article = [];
-
+let newArticle = [];
 burger.addEventListener("click", () => {
   if (menu.classList.contains("hidden")) {
     menu.classList.remove("hidden");
@@ -36,9 +37,12 @@ burger.addEventListener("click", () => {
   }
 });
 
+let i = 0;
+let key = 0;
 const q = query(colRef, orderBy("title", "asc"));
 getDocs(q).then( async (s) => {
   let allUrl = []
+  // console.log(allUrl);
   // console.log(s);
   // console.log(article, "flog");
    const pro = new Promise((resolve, reject) => {s.forEach( async (doc) => {
@@ -47,23 +51,35 @@ getDocs(q).then( async (s) => {
     let author = doc.data().author;
     let body = doc.data().body;
     let img = doc.data().img;
+    let id = doc.id;
+
+    
+    newArticle.push({
+      id: id,
+      tit: title,
+      bod: body,
+      aut: author 
+    })
+    key++;
+    // console.log(title);
     const sparkyRef = ref(storage, `images/${img}`);
      const url =  getDownloadURL(sparkyRef)
      allUrl.push(url);
       article.push({ ...doc.data(), id: doc.id, url });
-      // console.log("article pushed")
-      // .then((url) => {
-        // console.log(url + img);  
+      // console.log(title)
     });
     resolve(allUrl);
+    // console.log(title)
   });
-    return pro        
+  // console.log(title)
+    return pro;     
 }).then(async(pro) => {
-  
+  // console.log(title)
   let allUrlS = await Promise.all(pro);
   // console.log(allUrlS, "sna")
   // console.log(article, "snaA")
   article.map((article, index) => {
+    
     container.innerHTML += `<div class="card hover:shadow-lg cards cursor-pointer"> 
     <img src="${allUrlS[index]}.${article.img}" alt="stew" class="h-32 sm:h-48 w-full object-cover">
     <div class="m-4">
@@ -75,16 +91,39 @@ getDocs(q).then( async (s) => {
       <span>25 mins</span>
     </div>
   </div>`;
+  // console.log(i++);
+  // console.log(newArticle);
+  // console.log(article);
   const card = document.querySelectorAll(".cards");
-        for (let i = 0; i < card.length; i++) {
-          card[i].addEventListener("click", () => {
-            console.log(article[i]);
+  for (let i = 0; i < card.length; i++) {
+    card[i].addEventListener("click", () => {
+      mainBody.classList.add("hidden");
+      openBody.innerHTML = `<div class="bg-slate-200 justify-center mr-4 ml-4 mt-5 rounded p-5">
+      <div>
+          <p id="closeBody" class="text-right text-lg font-extrabold cursor-pointer ml-70">X</p>
+          <p class="text-lg text-primary font-bold border-b-2 border-primary mb-4">Title: ${newArticle[i].tit} </p> 
+          <p class="text-sm text-primary font-bold border-b-2 border-primary mb-4">Author: ${newArticle[i].aut} </p>
+      </div>
+
+      <div>
+          <p class="mb-5 mt-5">${newArticle[i].bod}</p>
+      </div>
+  </div>`
+
+  console.log("open");
+  const closeBody = document.querySelector("#closeBody");
+  closeBody.addEventListener("click", () => {
+      openBody.classList.add("hidden");
+      mainBody.classList.remove("hidden");
+      console.log("close");
+  })
+          // console.log(newArticle[i].id);
           });
         }
   })
  
 });
-console.log(article);
+// console.log(article);
 
 
 
