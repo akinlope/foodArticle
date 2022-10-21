@@ -6,7 +6,7 @@
     <link href="/dist/output.css" rel="stylesheet" />
   </head>
   <body class="text-gray-600 font-body">
-    <div id="mainBody" class="grid md:grid-cols-3">
+    <div class="grid md:grid-cols-3">
       <div class="md:col-span-1 md:flex md:justify-end">
         <nav class="text-right">
           <div class="flex justify-between items-center">
@@ -33,7 +33,7 @@
             <li class="text-gray-700 font-bold py-1">
               <a
                 id="HOME"
-                class="block px-4 flex justify-end"
+                class="block px-4 flex justify-end navFull"
               >
                 <span>Home</span>
                 <svg
@@ -104,7 +104,7 @@
           <h3 class="text-2xl font-semibold">For Ninjas</h3>
         </header>
 
-        <div>
+        <div id="mainBody">
           <h4 class="font-bold pb-2 mt-12 border-b border-gray-200">
             Latest Recipes
           </h4>
@@ -123,10 +123,12 @@
 
 
     <!-- To view the full information of each card -->
-    <div id="openBody" class="bg-secondary-200 font-body"></div>
+    <div id="openBody" class="bg-gray-200 font-body">
+      
+    </div>
     <script src="/dist/authLanding.bundle.js"></script>
     <script src="/dist/navbar.bundle.js"></script>
   </body>
 </html>
-
+<!-- bg-secondary-200 font-body -->
 

@@ -29,6 +29,7 @@ const colRef = collection(db, "articles");
 /* INITIALIZING FIREBASE COLLECTIONS */
 let article = [];
 let newArticle = [];
+
 burger.addEventListener("click", () => {
   if (menu.classList.contains("hidden")) {
     menu.classList.remove("hidden");
@@ -61,6 +62,7 @@ getDocs(q).then( async (s) => {
       aut: author 
     })
     key++;
+
     // console.log(title);
     const sparkyRef = ref(storage, `images/${img}`);
      const url =  getDownloadURL(sparkyRef)
@@ -79,7 +81,6 @@ getDocs(q).then( async (s) => {
   // console.log(allUrlS, "sna")
   // console.log(article, "snaA")
   article.map((article, index) => {
-    
     container.innerHTML += `<div class="card hover:shadow-lg cards cursor-pointer"> 
     <img src="${allUrlS[index]}.${article.img}" alt="stew" class="h-32 sm:h-48 w-full object-cover">
     <div class="m-4">
@@ -94,13 +95,14 @@ getDocs(q).then( async (s) => {
   // console.log(i++);
   // console.log(newArticle);
   // console.log(article);
+  // openBody.classList.add("hidden")
   const card = document.querySelectorAll(".cards");
   for (let i = 0; i < card.length; i++) {
     card[i].addEventListener("click", () => {
       mainBody.classList.add("hidden");
       openBody.innerHTML = `<div class="bg-slate-200 justify-center mr-4 ml-4 mt-5 rounded p-5">
       <div>
-          <p id="closeBody" class="text-right text-lg font-extrabold cursor-pointer ml-70">X</p>
+          <p id="closeBody" class="text-right text-lg font-extrabold cursor-pointer ml-60">X</p>
           <p class="text-lg text-primary font-bold border-b-2 border-primary mb-4">Title: ${newArticle[i].tit} </p> 
           <p class="text-sm text-primary font-bold border-b-2 border-primary mb-4">Author: ${newArticle[i].aut} </p>
       </div>
@@ -108,7 +110,7 @@ getDocs(q).then( async (s) => {
       <div>
           <p class="mb-5 mt-5">${newArticle[i].bod}</p>
       </div>
-  </div>`
+  </div>`;
 
   console.log("open");
   const closeBody = document.querySelector("#closeBody");
@@ -116,6 +118,7 @@ getDocs(q).then( async (s) => {
       openBody.classList.add("hidden");
       mainBody.classList.remove("hidden");
       console.log("close");
+      location.reload();
   })
           // console.log(newArticle[i].id);
           });
@@ -123,33 +126,6 @@ getDocs(q).then( async (s) => {
   })
  
 });
-// console.log(article);
-
-
-
-//taking the user back to the auth landing page
-const HOMES = document.querySelectorAll("#HOME");
-
-// for(let i = 0; i < HOMES.length; i++){
-
-//   onAuthStateChanged(auth, (user) => {
-//     if(user){
-//       HOMES[i].addEventListener("click", ()=> {
-//         // console.log(HOMES[i]);
-//         // console.log(user);
-//         // console.log("user is signed in");
-//         window.location.assign("/src/authorizedLandinPage/authLanding.html");
-//       });
-//     }else{
-//         // console.log("No user signed in");
-//       HOMES[i].addEventListener("click", ()=> {
-//         window.location.assign("/src/index.html");
-//       });
-//     }
-//   })
-// }
-
-
 
 
 //signout fuction

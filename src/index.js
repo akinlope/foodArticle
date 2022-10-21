@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { query, orderBy, collection, getDocs, getFirestore } from "firebase/firestore";
+import { query, orderBy, collection, getDocs, getFirestore, limit } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = {
@@ -15,6 +15,8 @@ initializeApp(firebaseConfig);
 const burger = document.querySelector("#burger");
 const menu = document.querySelector("#menu");
 const container = document.querySelector("#grid");
+const openBody = document.querySelector("#openBody");
+const mainBody = document.querySelector("#mainBody");
 
 burger.addEventListener("click", () => {
   if (menu.classList.contains("hidden")) {
@@ -24,13 +26,17 @@ burger.addEventListener("click", () => {
   }
 });
 
+let key = 0;
+
 const db = getFirestore();
 const colRef = collection(db, "articles");
 const storage = getStorage();
 
-let article = [];
 
-const q = query(colRef, orderBy("title", "asc"));
+let article = [];
+let newArticle = [];
+
+const q = query(colRef, orderBy("title", "asc"), limit(6));
 getDocs(q).then( async (s) => {
   let allUrl = []
   // console.log(s);
@@ -41,6 +47,17 @@ getDocs(q).then( async (s) => {
     let author = doc.data().author;
     let body = doc.data().body;
     let img = doc.data().img;
+    let id = doc.id;
+
+
+    newArticle.push({
+      id: id,
+      tit: title,
+      bod: body,
+      aut: author
+    })
+    key++;
+
     const sparkyRef = ref(storage, `images/${img}`);
      const url =  getDownloadURL(sparkyRef)
      allUrl.push(url);
@@ -57,6 +74,8 @@ getDocs(q).then( async (s) => {
   let allUrlS = await Promise.all(pro);
   // console.log(allUrlS, "sna")
   // console.log(article, "snaA")
+  
+  // let i = 1;
   article.map((article, index) => {
     container.innerHTML += `<div class="card hover:shadow-lg cards cursor-pointer"> 
     <img src="${allUrlS[index]}.${article.img}" alt="stew" class="h-32 sm:h-48 w-full object-cover">
@@ -69,10 +88,31 @@ getDocs(q).then( async (s) => {
       <span>25 mins</span>
     </div>
   </div>`;
+
+
   const card = document.querySelectorAll(".cards");
         for (let i = 0; i < card.length; i++) {
           card[i].addEventListener("click", () => {
-            // console.log(article[i].title);
+            mainBody.classList.add("hidden");
+            openBody.innerHTML = `<div class="bg-slate-200 justify-center mr-4 ml-4 mt-5 rounded p-5">
+      <div>
+          <p id="closeBody" class="text-right text-lg font-extrabold cursor-pointer ml-60">X</p>
+          <p class="text-lg text-primary font-bold border-b-2 border-primary mb-4">Title: ${newArticle[i].tit} </p> 
+          <p class="text-sm text-primary font-bold border-b-2 border-primary mb-4">Author: ${newArticle[i].aut} </p>
+      </div>
+
+      <div>
+          <p class="mb-5 mt-5">${newArticle[i].bod}</p>
+      </div>
+  </div>`;
+
+  const closeBody = document.querySelector("#closeBody");
+  closeBody.addEventListener("click", () => {
+      openBody.classList.add("hidden");
+      mainBody.classList.remove("hidden");
+      console.log("close");
+      location.reload();
+  })
           });
         }
   })
