@@ -15,7 +15,10 @@ initializeApp(firebaseConfig);
 
 const burger = document.querySelector("#burger");
 const menu = document.querySelector("#menu");
-const loginForm = document.querySelector("#loginForm")
+const loginForm = document.querySelector("#loginForm");
+const spinner = document.getElementById("spinner");
+
+// console.log(spinner);
 
 
 const auth = getAuth();
@@ -31,19 +34,24 @@ burger.addEventListener("click", ()=> {
 
 loginForm.addEventListener("submit", (e)=> {
     e.preventDefault()
+    spinner.classList.remove("hidden");
     let email = loginForm["email"].value;
     let password = loginForm["pwd"].value;
-    // console.log(password);
+    
+    let loginBtn = document.getElementById("loginBtn");
+    loginBtn.classList.add("disableBtn");
 
-    // console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
-        // userCredential.user.displayName = username;
+        
+        
         window.location.replace("../authorizedLandinPage/authLanding.html");
         alert("Login Successful");
     })
     .catch((error) => {
+        spinner.classList.add("hidden");
         alert(error.message);
+        loginBtn.classList.remove("disableBtn");
     })
 })

@@ -95,10 +95,20 @@
         </nav>
       </div>
 
+      
+      
+
       <main class="px-16 py-6 md:col-span-2 bg-gray-100 text-gray-600 max-w-md text-center mt-0 md:mt-28 rounded-md bg-center">
+        
         <span class="text-gray-500 text-2xl" >Login to your account</span>
         <div class="mt-4 bg-white shadow-md rounded-lg">
           <div class="h-2 bg-primary rounded-t-md"></div>
+
+          <!-- SPINNER LOADER  -->
+          <div id="spinner" class="z-50 hidden flex items-center justify-center mt-4 ">
+            <div class="w-24 h-24 border-l-2 border-primary rounded-full animate-spin"></div>
+          </div>
+
           <form action="submit" id="loginForm" class="px-8 py-6 text-left">
             <label class="block font-semibold text-gray-500">Email</label>
             <input
@@ -113,7 +123,7 @@
               id="pwd"
               />
             <divc class="flex justify-between items-baseline">
-              <button class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500">Login</button>
+              <button  id="loginBtn" class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500 ">Login</button>
               <a href="#" class="text-sm hover:underline">Forget Password?</a>
             </div>
           </form>

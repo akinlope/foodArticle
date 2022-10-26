@@ -27,6 +27,6 @@
 .valueAuthor{
     @apply block text-gray-500 text-sm
 }
-.navFull{
-    @apply border-r-4 border-primary px-4;
+.disableBtn{
+    @apply cursor-not-allowed;
 }

@@ -13,7 +13,9 @@ initializeApp(firebaseConfig);
 const burger = document.querySelector("#burger");
 const menu = document.querySelector("#menu");
 const signUpForm = document.querySelector("#sign-upForm");
-// const login = document.querySelector("#login");
+const login = document.querySelector("#login");
+const spinner = document.getElementById("spinner");
+
 
 const auth = getAuth();
 
@@ -28,11 +30,14 @@ burger.addEventListener("click", () => {
 // Signup form
  signUpForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("clicked");
+  // console.log("clicked");
     // get user info
     let username = signUpForm["uname"].value;
     let email = signUpForm["email"].value;
     let password = signUpForm["pwd"].value;
+
+    spinner.classList.remove("hidden");
+
     createUserWithEmailAndPassword(auth, email, username, password)
       .then((userCredential) => {
         userCredential.user.displayName = username;
@@ -43,8 +48,15 @@ burger.addEventListener("click", () => {
         alert("Registration successful");
       })
       .catch((error) => {
+        spinner.classList.add("hidden");
         alert(error.message);
         signUpForm.reset();
       });
   // }
 });
+
+
+// login button
+login.addEventListener("click", ()=> {
+  window.location.assign("/src/login/login.html")
+})
