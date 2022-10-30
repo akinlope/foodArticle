@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, auth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyAZtrim4yk9HgaT1IoDp8S60OcuHWNe1Og",
   authDomain: "food-article.firebaseapp.com",
