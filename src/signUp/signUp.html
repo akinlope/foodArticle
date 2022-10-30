@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/output.css" rel="stylesheet" />
   </head>
-  <body class="text-gray-600 font-body">
+  <body class="text-gray-600 font-body mr-5 ml-5">
     <div class="grid md:grid-cols-3">
-      <div class="md:col-span-1 md:flex md:justify-end">
+      <div class="md:flex md:justify-end">
         <nav class="text-right">
           <div class="flex justify-between items-center">
             <h1 class="font-bold uppercase p-4 border-b border-gray-100">
-              <a id="HOMES" class="hover:text-gray-700 cursor-pointer">Food Ninja</a>
+              <a id="HOMES" class="hover:text-gray-700 cursor-pointer"
+                >FOOD ARTICLE</a
+              >
             </h1>
             <div class="px-4 cursor-pointer md:hidden" id="burger">
               <svg
@@ -29,10 +31,7 @@
           </div>
           <ul class="text-sm mt-6 hidden md:block" id="menu">
             <li class="text-gray-700 font-bold py-1">
-              <a
-                id="HOME"
-                class="block px-4 flex justify-end cursor-pointer"
-              >
+              <a id="HOME" class="block px-4 flex justify-end cursor-pointer">
                 <span>Home</span>
                 <svg
                   class="w-5 ml-2"
@@ -50,10 +49,7 @@
               </a>
             </li>
             <li class="py-1">
-              <a
-                id="ABOUT"
-                class="block px-4 flex justify-end cursor-pointer"
-              >
+              <a id="ABOUT" class="block px-4 flex justify-end cursor-pointer">
                 <span>About</span>
                 <svg
                   class="w-5 ml-2"
@@ -94,53 +90,77 @@
           </ul>
         </nav>
       </div>
+      
 
-      <div class="flex justify-center">
-      <main class="px-16 py-6 md:col-span-2 bg-gray-100 text-gray-600 max-w-md text-center mt-0 md:mt-28 rounded-md bg-center">
-        <span class="text-gray-500 text-2xl" >Create your account</span>
-        <div class="mt-4 bg-white shadow-md rounded-lg">
-          <div class="h-2 bg-primary rounded-t-md"></div>
+      <main
+          class=" md:col-span-2 text-gray-600 text-center rounded mt-5 "
+        >
+          <span class="text-gray-500 text-2xl font-body font-extrabold">CREATE YOUR ACCOUNT</span>
+          <div class="mt-4 bg-white shadow-md rounded-lg">
+            <div class="h-2 bg-primary rounded-t-md"></div>
 
-          <!-- SPINNER LOADER  -->
-          <div id="spinner" class="z-50 hidden flex items-center justify-center mt-4 ">
-            <div class="w-24 h-24 border-l-2 border-primary rounded-full animate-spin"></div>
-          </div>
+            <!-- SPINNER LOADER  -->
+            <div
+              id="spinner"
+              class="z-50 hidden flex items-center justify-center mt-4"
+            >
+              <div
+                class="w-24 h-24 border-l-2 border-primary rounded-full animate-spin"
+              ></div>
+            </div>
 
-          <form action="submit" id="sign-upForm" class="px-8 py-6">
-              <label class="text-left block font-semibold text-gray-500">Username</label>
+            <form action="submit" id="sign-upForm" class="px-8 py-6">
+              <label class="text-left block font-semibold text-gray-500"
+                >Username</label
+              >
               <input
                 placeholder="Username"
                 type="text"
                 class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
                 id="uname"
-                />
-              <label class="text-left mt-3 block font-semibold text-gray-500">Email address</label>
-            <input
-              placeholder="Email"
-              type="email"
-              class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
-              id="email"
               />
-              <label class="text-left mt-3 block font-semibold text-gray-500">Password</label>
-            <input
-              placeholder="Password"
-              type="password"
-              class="border w-full h-5 px-3 py-5 mt-0 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
-              id="pwd"
+              <label class="text-left mt-3 block font-semibold text-gray-500"
+                >Email address</label
+              >
+              <input
+                placeholder="Email"
+                type="email"
+                class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
+                id="email"
               />
-            <div class="flex justify-between items-baseline">
-              <button class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500" >Register</button>
-              <button class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500" id="login">Login</button>
-            </div>
-            <div class="h-0.5 mt-2 mb-2 bg-primary rounded"></div>
-            <span class="text-gray-500 text-lg font-light text-center mt-4" >Sign up with</span>
-            <div class="flex justify-evenly">
+              <label class="text-left mt-3 block font-semibold text-gray-500"
+                >Password</label
+              >
+              <input
+                placeholder="Password"
+                type="password"
+                class="border w-full h-5 px-3 py-5 mt-0 hover:outline-none focus:outline-none focus:ring-1 focus:ring-primary rounded-md"
+                id="pwd"
+              />
+              <div class="flex justify-between items-baseline">
+                <button
+                  class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500"
+                >
+                  Register
+                </button>
+                <button
+                  class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500"
+                  id="login"
+                >
+                  Login
+                </button>
+              </div>
+              <div class="h-0.5 mt-2 mb-2 bg-primary rounded"></div>
+              <span class="text-gray-500 text-lg font-light text-center mt-4"
+                >Sign up with</span
+              >
+              <div class="flex justify-evenly">
                 <a href="">google</a>
-            </div>
-          </form>
-        </div>
-      </main>
-    </div>
+              </div>
+            </form>
+          </div>
+        </main>
+
     </div>
     <script src="/dist/signUp.bundle.js"></script>
     <script src="/dist/navbar.bundle.js"></script>
