@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, auth } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyAZtrim4yk9HgaT1IoDp8S60OcuHWNe1Og",
   authDomain: "food-article.firebaseapp.com",
@@ -38,6 +38,8 @@ burger.addEventListener("click", () => {
 
     spinner.classList.remove("hidden");
 
+    console.log(password);
+  
     createUserWithEmailAndPassword(auth, email, username, password)
       .then((userCredential) => {
         userCredential.user.displayName = username;

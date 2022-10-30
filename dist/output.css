@@ -603,6 +603,14 @@ video {
   z-index: 50;
 }
 
+.col-span-2{
+  grid-column: span 2 / span 2;
+}
+
+.col-span-3{
+  grid-column: span 3 / span 3;
+}
+
 .m-4{
   margin: 1rem;
 }
@@ -790,6 +798,10 @@ video {
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.resize-none{
+  resize: none;
 }
 
 .items-center{
@@ -1199,6 +1211,11 @@ video {
 
 .disableBtn{
   cursor: not-allowed;
+}
+
+.navFull{
+  --tw-text-opacity: 1;
+  color: rgb(255 99 99 / var(--tw-text-opacity));
 }
 
 .hover\:scale-125:hover{

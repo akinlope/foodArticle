@@ -30,3 +30,6 @@
 .disableBtn{
     @apply cursor-not-allowed;
 }
+.navFull{
+    @apply text-primary
+}

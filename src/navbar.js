@@ -15,6 +15,7 @@ const auth = getAuth();
 
 const HOME = document.querySelectorAll("#HOME");
 const ABOUT = document.querySelectorAll("#ABOUT");
+const BIGHOME = document.querySelectorAll("#HOMES");
 
 for (let i = 0; i < ABOUT.length; i++) {
   ABOUT[i].addEventListener("click", () => {
@@ -33,6 +34,7 @@ for (let i = 0; i < HOME.length; i++) {
       HOME[i].classList.add("navFull");
       ABOUT[i].classList.remove("navFull");
       console.log("Home is clicked...");
+      // HOME[i].style.color = "red";
     }
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -43,4 +45,16 @@ for (let i = 0; i < HOME.length; i++) {
       }
     });
   });
+}
+
+for (let i = 0; i < BIGHOME.length; i++) {
+  BIGHOME[i].addEventListener("click", ()=> {
+   onAuthStateChanged(auth, (user)=> {
+    if(user){
+      window.location.assign("/src/authorizedLandinPage/authLanding.html");
+    }else{
+      window.location.assign("/src/index.html");
+    }
+   })
+      })
 }

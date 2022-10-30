@@ -112,7 +112,7 @@ getDocs(q).then( async (s) => {
       </div>
   </div>`;
 
-  console.log("open");
+ 
   const closeBody = document.querySelector("#closeBody");
   closeBody.addEventListener("click", () => {
       openBody.classList.add("hidden");
