@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAZtrim4yk9HgaT1IoDp8S60OcuHWNe1Og",
   authDomain: "food-article.firebaseapp.com",
@@ -40,17 +41,26 @@ burger.addEventListener("click", () => {
 
     console.log(password);
   
-    createUserWithEmailAndPassword(auth, email, username, password)
-      .then((userCredential) => {
-        userCredential.user.displayName = username;
-        console.log(userCredential.user);
-        
-        signUpForm.reset();
+    createUserWithEmailAndPassword(auth, email, password, username)
+      .then((res) => {
+        // signUpForm.reset();
         window.location.href = "../login/login.html";
         alert("Registration successful");
+
+        // update the username to the user prefared username
+        return updateProfile(auth.currentUser, {
+          displayName: username
+        }).then(()=> {
+          console.log("user profile updated");
+        }).catch((err)=> {
+          console.log(err.message);
+        });
+
+        
       })
       .catch((error) => {
         spinner.classList.add("hidden");
+        console.log(password);
         alert(error.message);
         signUpForm.reset();
       });

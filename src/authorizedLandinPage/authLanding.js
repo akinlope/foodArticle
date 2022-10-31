@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import { getDocs, getFirestore, collection, query, orderBy, doc } from "firebase/firestore";
+import { getDocs, getFirestore, collection, query, orderBy } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = {
@@ -127,6 +127,16 @@ getDocs(q).then( async (s) => {
  
 });
 
+
+
+// get user username
+onAuthStateChanged(auth, (user)=> {
+  if(user){
+    const username = document.getElementById("usn");
+    username.innerHTML = user.displayName;
+    // console.log(user.displayName);
+  }
+})
 
 //signout fuction
 signout.addEventListener("click", () => {
