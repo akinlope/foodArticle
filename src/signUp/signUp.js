@@ -39,7 +39,8 @@ burger.addEventListener("click", () => {
 
     spinner.classList.remove("hidden");
 
-    console.log(password);
+    // console.log(password);
+    console.log(username);
   
     createUserWithEmailAndPassword(auth, email, password, username)
       .then((res) => {
@@ -48,7 +49,7 @@ burger.addEventListener("click", () => {
         alert("Registration successful");
 
         // update the username to the user prefared username
-        return updateProfile(auth.currentUser, {
+        updateProfile(auth.currentUser, {
           displayName: username
         }).then(()=> {
           console.log("user profile updated");

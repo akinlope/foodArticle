@@ -135,6 +135,7 @@ onAuthStateChanged(auth, (user)=> {
     const username = document.getElementById("usn");
     username.innerHTML = user.displayName;
     // console.log(user.displayName);
+    console.log(user);
   }
 })
 
