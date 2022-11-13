@@ -98,7 +98,7 @@
       
       
 
-      <main class="md:col-span-2 text-gray-600 text-center rounded mt-5">
+      <main class="md:col-span-2 text-gray-600 text-center rounded mt-5 " id="main">
         
         <span class="text-gray-500 text-2xl font-body font-extrabold" >LOGIN TO YOUR ACCOUNT</span>
         <div class="mt-4 bg-white shadow-md rounded-lg">
@@ -124,13 +124,27 @@
               />
             <divc class="flex justify-between items-baseline">
               <button  id="loginBtn" class="btn mt-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500 ">Login</button>
-              <a href="#" class="text-sm hover:underline">Forget Password?</a>
+              <a id="forgetPassword" class="text-sm cursor-pointer">Forget Password?</a>
             </div>
           </form>
         </div>
       </main>
-    </div>
 
+
+      <!-- FORGET PASSWORD -->
+    <div>
+
+    <div class=" bg-gray-50 rounded-lg border-b-4 border-r-4 hidden" id="forget" >
+      <p class="pt-5 text-primary flex justify-center font-extrabold text-2xl border-b-2">Enter Your Email</p>
+      <input type="text" class="mt-5 p-2 rounded text-primary border-none" placeholder="Email address">
+      <div class="flex justify-center mt-5">
+        <button id="forgetPasswordBtn" class="btn mt-5 mb-5 text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500">Send</button>
+      </div>
+    </div>
+ 
+
+
+    
     <script src="/dist/login.bundle.js"></script>
     <script src="/dist/navbar.bundle.js"></script>
   </body>

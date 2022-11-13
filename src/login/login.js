@@ -55,3 +55,18 @@ loginForm.addEventListener("submit", (e)=> {
         loginBtn.classList.remove("disableBtn");
     })
 })
+
+// FOR FORGET PASSWORD
+const forgetPassword = document.getElementById("forgetPassword");
+const main =  document.getElementById("main");
+const forget = document.getElementById("forget");
+const forgetPasswordBtn = document.getElementById("forgetPasswordBtn");
+
+forgetPassword.addEventListener("click", ()=> {
+    main.classList.add("hidden");
+    forget.classList.remove("hidden");
+});
+
+forgetPasswordBtn.addEventListener("click", ()=> {
+    
+})
